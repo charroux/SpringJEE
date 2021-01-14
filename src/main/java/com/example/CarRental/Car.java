@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Car {
@@ -52,6 +53,7 @@ public class Car {
 		this.price = price;
 	}
 
+	@Transient
 	public List<Dates> getDates() {
 		return dates;
 	}
