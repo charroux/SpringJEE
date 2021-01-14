@@ -3,6 +3,10 @@ package com.example.CarRental;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Car {
 	
 	private String plateNumber;
@@ -23,6 +27,7 @@ public class Car {
 		this.price = price;
 	}
 	
+	@Id
 	public String getPlateNumber() {
 		return plateNumber;
 	}
