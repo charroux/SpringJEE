@@ -1,5 +1,7 @@
 package com.example.CarRental;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -15,13 +17,30 @@ public class CarRentalApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(CarRepository carRepository) {
+	public CommandLineRunner demo(VehiculeRepository vehiculeRepository) {
 		return (args) -> {
+			
 			Car car = new Car("11AA22", "Aston Martin", 10000);
-			carRepository.save(car);
-			List<Car> cars = carRepository.findByBrand("Aston Martin");
-			for(Car c: cars) {
-				System.out.println(c);
+			
+			Rent rent = new Rent();
+			Date begin = Calendar.getInstance().getTime();
+			rent.setBegin(begin);
+			Date end = Calendar.getInstance().getTime();
+			rent.setEnd(end );
+			
+			car.getRents().add(rent);
+			rent.setVehicule(car);
+			
+			Person person = new Person("Tintin");
+			person.getRents().add(rent);
+			rent.setPerson(person);
+			
+			vehiculeRepository.save(car);
+			
+			
+			List<Vehicule> vehicules = vehiculeRepository.findByBrand("Aston Martin");
+			for(Vehicule vehicule: vehicules) {
+				System.out.println(vehicule);
 			}
 		};
 	}

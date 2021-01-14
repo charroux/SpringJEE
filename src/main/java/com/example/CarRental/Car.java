@@ -1,79 +1,32 @@
 package com.example.CarRental;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 
 @Entity
-public class Car {
+public class Car extends Vehicule {
 	
-	private String plateNumber;
-	private String brand;
-	private int price;
-	boolean rented;
-	
-	List<Dates> dates = new ArrayList<Dates>();
+	int numberOfSeats;
 	
 	public Car() {
 		super();
 	}
-	
+
 	public Car(String plateNumber, String brand, int price) {
-		super();
-		this.plateNumber = plateNumber;
-		this.brand = brand;
-		this.price = price;
-	}
-	
-	@Id
-	public String getPlateNumber() {
-		return plateNumber;
-	}
-	
-	public void setPlateNumber(String plateNumber) {
-		this.plateNumber = plateNumber;
-	}
-	
-	public String getBrand() {
-		return brand;
+		super(plateNumber, brand, price);
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public int getNumberOfSeats() {
+		return numberOfSeats;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-	
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	@Transient
-	public List<Dates> getDates() {
-		return dates;
-	}
-
-	public void setDates(List<Dates> dates) {
-		this.dates = dates;
-	}
-
-	public boolean isRented() {
-		return rented;
-	}
-
-	public void setRented(boolean rented) {
-		this.rented = rented;
+	public void setNumberOfSeats(int numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
 	}
 
 	@Override
 	public String toString() {
-		return "Car [plateNumber=" + plateNumber + ", brand=" + brand + ", price=" + price + ", rented=" + rented
-				+ ", dates=" + dates + "]";
+		return "Car [numberOfSeats=" + numberOfSeats + ", toString()=" + super.toString() + "]";
 	}
-
+	
 }
