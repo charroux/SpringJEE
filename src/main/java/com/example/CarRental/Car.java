@@ -1,10 +1,16 @@
 package com.example.CarRental;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Car {
 	
 	private String plateNumber;
 	private String brand;
 	private int price;
+	boolean rented;
+	
+	List<Dates> dates = new ArrayList<Dates>();
 	
 	public Car() {
 		super();
@@ -41,9 +47,26 @@ public class Car {
 		this.price = price;
 	}
 
+	public List<Dates> getDates() {
+		return dates;
+	}
+
+	public void setDates(List<Dates> dates) {
+		this.dates = dates;
+	}
+
+	public boolean isRented() {
+		return rented;
+	}
+
+	public void setRented(boolean rented) {
+		this.rented = rented;
+	}
+
 	@Override
 	public String toString() {
-		return "Car [plateNumber=" + plateNumber + ", brand=" + brand + ", price=" + price + "]";
+		return "Car [plateNumber=" + plateNumber + ", brand=" + brand + ", price=" + price + ", rented=" + rented
+				+ ", dates=" + dates + "]";
 	}
 
 }
