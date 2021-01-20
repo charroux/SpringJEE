@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Rent {
 	
@@ -46,6 +48,7 @@ public class Rent {
 	}
 	
 	@ManyToOne
+	@JsonIgnore
 	public Vehicule getVehicule() {
 		return vehicule;
 	}
@@ -55,6 +58,7 @@ public class Rent {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
 	public Person getPerson() {
 		return person;
 	}

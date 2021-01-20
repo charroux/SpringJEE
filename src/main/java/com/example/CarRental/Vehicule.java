@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Vehicule {
 
@@ -75,6 +77,7 @@ public class Vehicule {
 	}
 
 	@OneToMany(mappedBy = "vehicule", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@JsonIgnore
 	public List<Rent> getRents() {
 		return rents;
 	}

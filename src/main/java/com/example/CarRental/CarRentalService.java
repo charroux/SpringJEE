@@ -37,6 +37,8 @@ public class CarRentalService {
 		person.getRents().add(rent);
 		rent.setPerson(person);
 		
+		vehiculeRepository.save(car);
+		
 		//cars.add(new Car("11AA22", "Ferrari", 1000));
 		//cars.add(new Car("33BB44", "Porshe", 2222));
 	}
@@ -52,11 +54,11 @@ public class CarRentalService {
 		
 		// remplacer le tableau par une requête dans la base de données
 		
-		for(Car car: cars){
+		/*for(Car car: cars){
 			if(car.getPlateNumber().equals(plaque)){
 				return car;
 			}
-		}
+		}*/
 		return null;
 	}
 	
@@ -66,7 +68,7 @@ public class CarRentalService {
 		// remplacer le tableau par une requête dans la base de données
 		
 		System.out.println(car);
-		cars.add(car);
+		//cars.add(car);
 	}
 	
 	@PutMapping("/cars/{plateNumber}")
@@ -77,7 +79,7 @@ public class CarRentalService {
 		// remplacer le tableau par une requête dans la base de données
 		
 		
-		for(Car car: cars) {
+		/*for(Car car: cars) {
 			if(car.getPlateNumber().equals(plaque)) {
 				if(rent == true) {
 					car.getDates().add(dates);
@@ -87,7 +89,7 @@ public class CarRentalService {
 					car.setRented(false);
 				}
 			}
-		}
+		}*/
 		
 	}
 
