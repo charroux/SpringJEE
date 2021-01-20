@@ -1,5 +1,7 @@
 package com.example.CarRental;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,9 +24,9 @@ public class CarRentalService {
 	public CarRentalService(VehiculeRepository vehiculeRepository) {
 		this.vehiculeRepository = vehiculeRepository;
 		
-		Car car = new Car("11AA22", "Aston Martin", 10000);
+		Car car = new Car("11AA22", "Aston Martin", 10000, 5);
 		
-		Rent rent = new Rent();
+/*		Rent rent = new Rent();
 		Date begin = Calendar.getInstance().getTime();
 		rent.setBegin(begin);
 		Date end = Calendar.getInstance().getTime();
@@ -36,60 +38,61 @@ public class CarRentalService {
 		Person person = new Person("Tintin");
 		person.getRents().add(rent);
 		rent.setPerson(person);
-		
+*/		
 		vehiculeRepository.save(car);
-		
-		//cars.add(new Car("11AA22", "Ferrari", 1000));
-		//cars.add(new Car("33BB44", "Porshe", 2222));
 	}
 	
 	@GetMapping("/cars")
 	public Iterable<Vehicule> getListOfCars(){
 		return vehiculeRepository.findAll();
-		//return cars;
 	}
 
 	@GetMapping("/cars/{plateNumber}")
-	public Car getCar(@PathVariable(value = "plateNumber") String plaque){
-		
-		// remplacer le tableau par une requête dans la base de données
-		
-		/*for(Car car: cars){
-			if(car.getPlateNumber().equals(plaque)){
-				return car;
-			}
-		}*/
-		return null;
+	public Vehicule getCar(@PathVariable(value = "plateNumber") String plaque){
+		return vehiculeRepository.findById(plaque).get();
 	}
 	
 	@PostMapping("/cars")
 	public void addCar(@RequestBody Car car) throws Exception{
-		
-		// remplacer le tableau par une requête dans la base de données
-		
-		System.out.println(car);
-		//cars.add(car);
+		vehiculeRepository.save(car);
 	}
 	
 	@PutMapping("/cars/{plateNumber}")
 	public void rent(@PathVariable("plateNumber") String plaque, 
 			@RequestParam(value="rent", required = true)boolean rent, 
-			@RequestBody Dates dates){
+			@RequestBody Dates dates) throws ParseException{
 		
-		// remplacer le tableau par une requête dans la base de données
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
 		
+		Vehicule vehicule = vehiculeRepository.findById(plaque).get();
 		
-		/*for(Car car: cars) {
-			if(car.getPlateNumber().equals(plaque)) {
-				if(rent == true) {
-					car.getDates().add(dates);
-					car.setRented(true);
-				} else {
-					// car.getDates().remove(dates);	décommenter si on veut supprimer l'historique des dates
-					car.setRented(false);
-				}
+		if(vehicule != null){
+			if(rent == true) {
+				
+				Rent newRent = new Rent();
+				
+				String begin = dates.getBegin();
+				Date beginDate = dateFormat.parse(begin);
+				newRent.setBegin(beginDate);
+				
+				String end = dates.getBegin();
+				Date endDate = dateFormat.parse(end);
+				newRent.setEnd(endDate);
+				
+				vehicule.getRents().add(newRent);
+				newRent.setVehicule(vehicule);
+				
+				vehicule.setRented(true);
+				
+			} else {
+				
+				vehicule.setRented(false);
+				
 			}
-		}*/
+			
+			vehiculeRepository.save(vehicule);
+			
+		}
 		
 	}
 

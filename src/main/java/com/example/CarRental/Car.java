@@ -12,8 +12,9 @@ public class Car extends Vehicule {
 		super();
 	}
 
-	public Car(String plateNumber, String brand, int price) {
+	public Car(String plateNumber, String brand, int price, int numberOfSeats) {
 		super(plateNumber, brand, price);
+		this.numberOfSeats = numberOfSeats;
 	}
 
 	public int getNumberOfSeats() {
