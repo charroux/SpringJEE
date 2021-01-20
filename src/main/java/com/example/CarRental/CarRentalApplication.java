@@ -26,7 +26,7 @@ public class CarRentalApplication {
 			Date begin = Calendar.getInstance().getTime();
 			rent.setBegin(begin);
 			Date end = Calendar.getInstance().getTime();
-			rent.setEnd(end );
+			rent.setEnd(end);
 			
 			car.getRents().add(rent);
 			rent.setVehicule(car);
@@ -37,8 +37,12 @@ public class CarRentalApplication {
 			
 			vehiculeRepository.save(car);
 			
+			Iterable<Vehicule> vehicules = vehiculeRepository.findAll();;
+			for(Vehicule vehicule: vehicules) {
+				System.out.println(vehicule);
+			}
 			
-			List<Vehicule> vehicules = vehiculeRepository.findByBrand("Aston Martin");
+			vehicules = vehiculeRepository.findByBrand("Aston Martin");
 			for(Vehicule vehicule: vehicules) {
 				System.out.println(vehicule);
 			}
